@@ -1,0 +1,48 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册</title>
+    <link rel="stylesheet" href="{% static "assets/css/bootstrap.min.css" %}"/>
+</head>
+<body>
+{#/*action="{% url 'user:login' %}" */#}
+ <form method="post" >
+<div style="width: 800px;margin: 0 auto;">
+      {% csrf_token %}
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">注册</div>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="squareInput">邮箱</label>
+                <input type="text" class="form-control input-square" name="email" id="squareInput" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="squareInput">用户名</label>
+                <input type="text" class="form-control input-square" name="name" id="squareInput" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="squareInput">密码</label>
+                <input type="password" class="form-control input-square" name="password1" id="squareInput" placeholder="">
+            </div>
+             <div class="form-group">
+                <label for="squareInput">确认密码</label>
+                <input type="password" class="form-control input-square" name="password2" id="squareInput" placeholder="">
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success" type="submit" >注册</button>
+                 <a href="{% url 'user:login' %}" class="btn btn-link">已有用户请登录</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+ </form>
+</body>
+</html>

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+
+ <form method="post">
+     {% csrf_token %}
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">编辑</div>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <input type="text" class="form-control" name="name" value="{{ edit.name }}"  placeholder="用户名">
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control " name="email" value="{{ edit.email }}"  placeholder="邮箱">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control " name="phone" value="{{ edit.phone }}"  placeholder="电话">
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control " name="is_superuser" value="{{ edit.is_superuser }}"  placeholder="等级">
+            </div>
+            <div class="form-group">
+                 <span class="text-danger">*时间格式：XXXX-XX-XX</span>
+                <input type="text" class="form-control " name="create_time" value="{{ edit.create_time }}"  placeholder="创建时间">
+            </div>
+
+            <div class="card-action">
+                <button class="btn btn-success" type="submit">编辑</button>
+            </div>
+        </div>
+
+    </div>
+    </form>
+{% endblock %}

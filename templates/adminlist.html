@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+    <link rel="stylesheet" href="{% static "assets/css/bootstrap.min.css" %}">
+    <script src="{% static "assets/js/core/jquery.3.2.1.min.js" %}"></script>
+
+    <div class="card">
+        <div class="card-header ">
+            <h4 class="card-title">管理员</h4>
+            <p class="card-category">管理员列表</p>
+               <div class="td-actions text-right" >
+                   <div class="col-lg-4 col-md-9 col-sm-12"  style="width: 100px">
+                       <button id="displayNotif" class="btn btn-success" ><a href="{% url 'user:adminadd' %}"><span>添加管理员</span></a></button>
+
+                   </div>
+{#                            <div class="form-button-action">#}
+{#                                <button type="button" data-toggle="tooltip" title="Add"#}
+{#                                        class="btn btn-link btn-simple-danger">#}
+{#                                    <i class="la la-edit" style="width: 250px"><a href="{% url 'user:adminadd' %}"><span>添加管理员</span></a></i>#}
+{#                                </button>#}
+{#                            </div>#}
+        </div>
+        <div class="card-body">
+            <table class="table table-head-bg-success table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">用户名</th>
+                    <th scope="col">邮箱</th>
+                    <th scope="col">电话</th>
+                    <th scope="col">等级</th>
+                    <th scope="col">创建时间</th>
+                    <th scope="col" style="width:110px" >操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for admin in adminlist %}
+                <tr>
+                    <td>{{ admin.name }}</td>
+                    <td>{{ admin.email }}</td>
+                    <td>{{ admin.phone }}</td>
+                    {% if admin.is_superuser == 0  %}
+                        <td>普通用户</td>
+                    {% else  %}
+                         <td>超级用户</td>
+                    {% endif %}
+                    <td>{{ admin.create_time }}</td>
+                    <td class="td-actions text-right">
+                            <div class="form-button-action">
+                                <button type="button" data-toggle="tooltip" title="Edit"
+                                        class="btn btn-link btn-simple-danger">
+                                    <i class="la la-edit"><a href="{% url 'user:adminedit' %}?id={{ admin.id }}"><span>编辑</span></a></i>
+                                </button>
+
+                                <button type="button" data-toggle="tooltip" title="Remove"
+                                        class="btn btn-link btn-simple-danger">
+                                    <i class="la la-times"><a href="{% url 'user:admindel' %}?id={{ admin.id }}"><span>删除</span></a></i>
+                                </button>
+                            </div>
+                        </td>
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {{ current_page.object_list }}
+            <nav >
+          <ul class="pagination">
+               {% if current_page.has_previous %}
+              <li><a href="?page={{ current_page.previous_page_number  }}">上一页<span class="sr-only">(current)</span> </a></li>
+                {% endif %}
+{#        {% pagination current_page paginator 12 5 as page_list %}  <!-- 引用自定义标签，并传入参数 -->#}
+
+                {{ page_list|safe }}  <!--  显示 -->
+
+                {% if current_page.has_next %}
+              <li><a href="?page={{ current_page.next_page_number }}">下一页 <span class="sr-only">(current)</span></a></li>
+                {% endif %}
+          </ul>
+            </nav>
+        </div>
+    </div>
+    <script>
+    $(document).ready(function(){
+        $('.pagination li a').each(function(){
+
+           if ( $(this).html() == {{ current_page.number }} ){
+               $(this).parent().addClass('active')
+           }
+        });
+
+    })
+
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}会员修改{% endblock title %}
+{% block content %}
+    <form method="post">
+     {% csrf_token %}
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">编辑</div>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <input type="text" class="form-control " name="id" value="{{ eid.id }}"  placeholder="序号">
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control " name="vipname" value="{{ eid.vipname }}"  placeholder="等级">
+            </div>
+
+            <div class="card-action">
+                <button class="btn btn-success" type="submit">增加</button>
+            </div>
+        </div>
+
+    </div>
+
+    </form>
+
+
+{% endblock %}
